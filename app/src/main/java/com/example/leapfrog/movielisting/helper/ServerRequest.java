@@ -83,6 +83,7 @@ public class ServerRequest {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
                 hideProgressBar();
+                makeToast("No Intenet connection!!!");
             }
         });
 
@@ -117,6 +118,7 @@ public class ServerRequest {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
                 hideProgressBar();
+                makeToast("No Intenet connection!!!");
             }
         });
 
@@ -150,6 +152,8 @@ public class ServerRequest {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
 //                hideProgressBar();
+
+                makeToast("No Intenet connection!!!");
             }
         });
 
@@ -180,5 +184,17 @@ public class ServerRequest {
         });
     }
 
+
+    public void makeToast(final String message) {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(_mcontext,
+                        message,
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
 
 }
