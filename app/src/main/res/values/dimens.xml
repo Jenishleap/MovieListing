@@ -15,7 +15,7 @@
     <dimen name="movie_item_margin">5dp</dimen>
 
     <dimen name="cat_btns_height">40dp</dimen>
-    <dimen name="movie_bckgnd_height">160dp</dimen>
+    <dimen name="movie_bckgnd_height">250dp</dimen>
     <dimen name="movie_overview_height">50dp</dimen>
     <dimen name="card_margin">5dp</dimen>
     <dimen name="rv_card_margin">2dp</dimen>

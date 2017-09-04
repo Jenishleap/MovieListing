@@ -1,21 +1,37 @@
 package com.example.leapfrog.movielisting;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Rating;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.leapfrog.movielisting.adapters.MovieCasteAdapter;
 import com.example.leapfrog.movielisting.helper.HandleResponse;
+import com.example.leapfrog.movielisting.helper.RatingCalculator;
 import com.example.leapfrog.movielisting.helper.RetrofitClient;
 import com.example.leapfrog.movielisting.helper.ServerRequest;
 import com.example.leapfrog.movielisting.objects.MovieCasts;
 import com.example.leapfrog.movielisting.objects.MovieDetail;
+
+import static android.R.attr.path;
 
 
 public class MovieDetailActivity extends AppCompatActivity {
@@ -31,11 +47,22 @@ public class MovieDetailActivity extends AppCompatActivity {
     MovieCasteAdapter casteAdapter;
     private LinearLayoutManager llManagerHorizontalKOT;
     RecyclerView rvmovie_casts;
+    private CollapsingToolbarLayout collapsingToolbarLayout = null;
+    RatingBar rbMovieRatings;
+    private Bitmap bitmap = null;
+    public static int NUM_OF_STARS = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.movie_detail_activity);
+//        setContentView(R.layout.movie_detail_activity);
+        setContentView(R.layout.movie_detail_activity_collapse);
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         intializeUI();
 
         Bundle extras = getIntent().getExtras();
@@ -45,11 +72,14 @@ public class MovieDetailActivity extends AppCompatActivity {
         Log.d(TAG, "the movie detail: " + movie_id);
         fetchMovieDetail(movie_id);
         fetchMovieCaste(movie_id);
+        toolbarTextAppernce();
     }
 
     private void intializeUI() {
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ivMovieBackground = (ImageView) findViewById(R.id.ivMovieBackground);
         ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);
+        rbMovieRatings = (RatingBar) findViewById(R.id.rbMovieRatings);
 
         tvMovieTitle = (TextView) findViewById(R.id.tvMovieTitle);
         tvMovieDescription = (TextView) findViewById(R.id.tvMovieDescription);
@@ -111,6 +141,60 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .placeholder(R.mipmap.ic_launcher) // Place holder image
                 .error(R.mipmap.ic_launcher) // On error image
                 .into(ivMovieBackground); // ImageView to display image
+
+        rbMovieRatings.setNumStars(NUM_OF_STARS);
+        rbMovieRatings.setRating(RatingCalculator.calculateRatingNum(movie.getVote_average().toString()));
+
+
+        //grab color for stars
+        Glide.with(this)
+                .load(RetrofitClient.IMG_URL + movie.getPosterPath())
+                .asBitmap()
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                        bitmap = resource;
+                        setStarColors(bitmap);
+                    }
+                });
+
+    }
+
+
+    private void toolbarTextAppernce() {
+        collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.collapsedappbar);
+        collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.expandedappbar);
+    }
+
+
+    private void setStarColors(Bitmap bitmap) {
+
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+
+            @Override
+            public void onGenerated(Palette palette) {
+
+                int defaultValue = 0x000000;
+                int vibrant = palette.getVibrantColor(defaultValue);
+                int vibrantLight = palette.getLightVibrantColor(defaultValue);
+                int vibrantDark = palette.getDarkVibrantColor(defaultValue);
+                int muted = palette.getMutedColor(defaultValue);
+                int mutedLight = palette.getLightMutedColor(defaultValue);
+                int mutedDark = palette.getDarkMutedColor(defaultValue);
+
+
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 }
