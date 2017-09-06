@@ -24,4 +24,6 @@
     <dimen name="caste_itm_width">160dp</dimen>
     <dimen name="caste_img_height">140dp</dimen>
 
+    <dimen name="page_tab_strip_title_height">15dp</dimen>
+
 </resources>

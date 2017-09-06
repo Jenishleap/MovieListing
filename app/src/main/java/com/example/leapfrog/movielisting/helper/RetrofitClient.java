@@ -1,5 +1,8 @@
 package com.example.leapfrog.movielisting.helper;
 
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -11,14 +14,25 @@ public class RetrofitClient {
     public static String IMG_URL = "https://image.tmdb.org/t/p/w640";
     private static Retrofit retrofit = null;
 
-    public static final String catagory = null;
 
     //make singlton instance of retrofit object
     public static Retrofit getInstance() {
+
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        // set your desired log level
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .addInterceptor(interceptor)
+                .build();
+
+
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
                     .build();
 
         }

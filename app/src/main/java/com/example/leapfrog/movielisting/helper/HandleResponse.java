@@ -23,5 +23,9 @@ public class HandleResponse {
         public abstract void handleMovieCaste(MovieCasts movieCasts);
     }
 
+    public abstract class HandleAllResponse {
+        public abstract void handleResponse(String response);
+    }
+
 
 }

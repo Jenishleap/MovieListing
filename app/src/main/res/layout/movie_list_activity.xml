@@ -4,63 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/cat_btns_height"
-        android:orientation="horizontal"
-        android:weightSum="1">
 
-        <Button
-            android:id="@+id/btnPopular"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+
+        <!--this should be direct child of viewpager-->
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_header"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:text="Popular"
-            android:textSize="@dimen/txt_small" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:paddingBottom="@dimen/page_tab_strip_title_height"
+            android:paddingTop="@dimen/page_tab_strip_title_height" />
 
-
-        <Button
-            android:id="@+id/btnTopRated"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:text="Top Rated"
-            android:textSize="@dimen/txt_small" />
-
-
-        <Button
-            android:id="@+id/btnUpComing"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:text="UpComing"
-            android:textSize="@dimen/txt_small" />
-
-
-        <Button
-            android:id="@+id/btnNowPlaying"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:text="Now playing"
-            android:textSize="@dimen/txt_small" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/overallpadding">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvmovie_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+    </android.support.v4.view.ViewPager>
 
 
 </LinearLayout>

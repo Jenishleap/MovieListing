@@ -40,6 +40,7 @@ public class ServerRequest {
         this.activity_ref = activity_ref;
     }
 
+    //this is unused
     public ServerRequest(Context context, HandleResponse.HandleMovieDetail response, Activity activity_ref) {
         pb_title = "Loading...";
         this._mcontext = context;
@@ -58,7 +59,7 @@ public class ServerRequest {
 
     //request for movie list
     public void getAllMovieLists(String category) {
-        showProgressBar();
+//        showProgressBar();
         if (API_KEY.isEmpty()) {
             //this can get hour error, change it to log from toast
             Toast.makeText(_mcontext, "Please obtain your API KEY first from themoviedb.org", Toast.LENGTH_LONG).show();
@@ -140,7 +141,7 @@ public class ServerRequest {
             @Override
             public void onResponse(Call<MovieCasts> call, Response<MovieCasts> response) {
 
-//                hideProgressBar();
+                hideProgressBar();
                 if (response != null) {
                     MovieCasts movieCasts = response.body();
                     handleMovieCaste.handleMovieCaste(movieCasts);
@@ -151,7 +152,7 @@ public class ServerRequest {
             public void onFailure(Call<MovieCasts> call, Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
-//                hideProgressBar();
+                hideProgressBar();
 
                 makeToast("No Intenet connection!!!");
             }
