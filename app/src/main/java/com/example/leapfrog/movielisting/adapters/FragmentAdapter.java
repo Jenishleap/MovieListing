@@ -13,7 +13,7 @@ import static com.example.leapfrog.movielisting.MovieListActivity.POPULAR;
 import static com.example.leapfrog.movielisting.MovieListActivity.TOPRATED;
 import static com.example.leapfrog.movielisting.MovieListActivity.UPCOMING;
 
-
+//im in new branch
 public class FragmentAdapter extends FragmentPagerAdapter {
     List<Fragment> fragments;
     private static int NUM_OF_FRAGMENTS = 4;
