@@ -2,19 +2,20 @@ package com.example.leapfrog.movielisting.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.example.leapfrog.movielisting.fragments.MovieListFragment;
 
 import java.util.List;
 
-import static com.example.leapfrog.movielisting.MovieListActivity.NOWPLAYING;
-import static com.example.leapfrog.movielisting.MovieListActivity.POPULAR;
-import static com.example.leapfrog.movielisting.MovieListActivity.TOPRATED;
-import static com.example.leapfrog.movielisting.MovieListActivity.UPCOMING;
+import static com.example.leapfrog.movielisting.activities.MovieListActivity.NOWPLAYING;
+import static com.example.leapfrog.movielisting.activities.MovieListActivity.POPULAR;
+import static com.example.leapfrog.movielisting.activities.MovieListActivity.TOPRATED;
+import static com.example.leapfrog.movielisting.activities.MovieListActivity.UPCOMING;
 
 //im in new branch
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentStatePagerAdapter {
     List<Fragment> fragments;
     private static int NUM_OF_FRAGMENTS = 4;
 
@@ -34,7 +35,7 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 //        return this.fragments.get(position);
 
-
+        Log.d("frag_position", "fragment_position is: " + position);
         switch (position) {
             case 0:
                 return MovieListFragment.newInstance(POPULAR);

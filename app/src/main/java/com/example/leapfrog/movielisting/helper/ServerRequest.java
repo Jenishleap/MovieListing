@@ -9,8 +9,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.leapfrog.movielisting.objects.AllMovies;
+import com.example.leapfrog.movielisting.objects.Movie;
 import com.example.leapfrog.movielisting.objects.MovieCasts;
 import com.example.leapfrog.movielisting.objects.MovieDetail;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,7 +63,7 @@ public class ServerRequest {
 
 
     //request for movie list
-    public void getAllMovieLists(String category) {
+    public void getAllMovieLists(final String category) {
 //        showProgressBar();
         if (API_KEY.isEmpty()) {
             //this can get hour error, change it to log from toast
@@ -69,13 +74,24 @@ public class ServerRequest {
                 RetrofitClient.getInstance().create(RESTAPIMethods.class);
 
         Call<AllMovies> call = client.getAllMovies(category, API_KEY);
+
         call.enqueue(new Callback<AllMovies>() {
             @Override
             public void onResponse(Call<AllMovies> call, Response<AllMovies> response) {
 
                 hideProgressBar();
                 if (response != null) {
-                    handleResponse.handleResponse(response.body().getResults());
+
+                    LinkedHashMap<String, Movie> my_movies = new LinkedHashMap<>();
+                    ArrayList<String> movie_ids = new ArrayList<>();
+                    for (Movie movie : response.body().getResults()) {
+                        movie_ids.add(String.valueOf(movie.getId()));
+                        my_movies.put(String.valueOf(movie.getId()), movie);
+                    }
+                    Log.d("movie_ids", "the list of movie_ids: " + movie_ids);
+
+//                    handleResponse.handleResponse(response.body().getResults(), movie_ids, category);
+                    handleResponse.handleResponse(my_movies, movie_ids, category);
                 }
             }
 

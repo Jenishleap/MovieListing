@@ -6,13 +6,19 @@ import com.example.leapfrog.movielisting.objects.MovieCasts;
 import com.example.leapfrog.movielisting.objects.MovieDetail;
 
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class HandleResponse {
 
 
+    /*public abstract class HandleAllMovies {
+        public abstract void handleResponse(ArrayList<Movie> movies, ArrayList<String> movie_ids, String category);
+    }*/
+
     public abstract class HandleAllMovies {
-        public abstract void handleResponse(List<Movie> movies);
+        public abstract void handleResponse(LinkedHashMap<String, Movie> movies, ArrayList<String> movie_ids, String category);
     }
 
     public abstract class HandleMovieDetail {

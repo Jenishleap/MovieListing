@@ -1,6 +1,8 @@
 package com.example.leapfrog.movielisting.helper;
 
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -19,11 +21,19 @@ public class RetrofitClient {
     public static Retrofit getInstance() {
 
 
+        //interceptor for logging responses
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         // set your desired log level
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+        //interceptor for adding header files
+        HttpInterceptor httpInterceptor = new HttpInterceptor();
+
         OkHttpClient client = new OkHttpClient().newBuilder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .addNetworkInterceptor(httpInterceptor)
                 .addInterceptor(interceptor)
                 .build();
 
@@ -40,3 +50,6 @@ public class RetrofitClient {
 
     }
 }
+
+//in retrofit3 and okhttp3, interceptors works by queue,
+// so add logginginterceptors at end after other interceptors

@@ -1,13 +1,9 @@
-package com.example.leapfrog.movielisting;
+package com.example.leapfrog.movielisting.activities;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.Rating;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBar;
@@ -16,7 +12,6 @@ import android.support.v7.graphics.Palette;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -25,8 +20,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.example.leapfrog.movielisting.R;
 import com.example.leapfrog.movielisting.adapters.MovieCasteAdapter;
 import com.example.leapfrog.movielisting.fragments.MovieListFragment;
 import com.example.leapfrog.movielisting.helper.HandleResponse;
@@ -35,8 +30,6 @@ import com.example.leapfrog.movielisting.helper.RetrofitClient;
 import com.example.leapfrog.movielisting.helper.ServerRequest;
 import com.example.leapfrog.movielisting.objects.MovieCasts;
 import com.example.leapfrog.movielisting.objects.MovieDetail;
-
-import static android.R.attr.path;
 
 
 public class MovieDetailActivity extends AppCompatActivity {

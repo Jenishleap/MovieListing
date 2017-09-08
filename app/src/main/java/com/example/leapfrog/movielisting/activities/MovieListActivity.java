@@ -1,4 +1,4 @@
-package com.example.leapfrog.movielisting;
+package com.example.leapfrog.movielisting.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.leapfrog.movielisting.R;
 import com.example.leapfrog.movielisting.adapters.FragmentAdapter;
 import com.example.leapfrog.movielisting.adapters.MovieAdapter;
 import com.example.leapfrog.movielisting.adapters.MovieCasteAdapter;
@@ -57,7 +58,6 @@ public class MovieListActivity extends AppCompatActivity {
     }
 
     private void initializeUI() {
-
         _mcontext = getApplicationContext();
 
 

@@ -1,7 +1,7 @@
 package com.example.leapfrog.movielisting.helper;
 
 
-import com.example.leapfrog.movielisting.MovieDetailActivity;
+import com.example.leapfrog.movielisting.activities.MovieDetailActivity;
 
 public class RatingCalculator {
 
