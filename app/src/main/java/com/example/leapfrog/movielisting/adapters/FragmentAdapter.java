@@ -14,7 +14,7 @@ import static com.example.leapfrog.movielisting.activities.MovieListActivity.POP
 import static com.example.leapfrog.movielisting.activities.MovieListActivity.TOPRATED;
 import static com.example.leapfrog.movielisting.activities.MovieListActivity.UPCOMING;
 
-//im in new branch
+
 public class FragmentAdapter extends FragmentStatePagerAdapter {
     List<Fragment> fragments;
     private static int NUM_OF_FRAGMENTS = 4;

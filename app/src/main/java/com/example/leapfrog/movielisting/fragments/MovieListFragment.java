@@ -71,12 +71,6 @@ public class MovieListFragment extends Fragment {
     public List<String> nowplaying_movie_ids;
 
 
-    public ArrayList<Movie> popular_movies;
-    public ArrayList<Movie> toprated_movies;
-    public ArrayList<Movie> upcoming_movies;
-    public ArrayList<Movie> nowplaying_movies;
-
-
     public ArrayList<Movie> retrieved_movie_lists;
 
 
