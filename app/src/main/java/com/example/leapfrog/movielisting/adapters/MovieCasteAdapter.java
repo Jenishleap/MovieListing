@@ -119,8 +119,8 @@ public class MovieCasteAdapter extends RecyclerView.Adapter<MovieCasteAdapter.It
                     .centerCrop() // Image scale type
                     .crossFade()
 //                    .override(800, 500) // Resize image
-                    .placeholder(R.mipmap.ic_launcher) // Place holder image
-                    .error(R.mipmap.ic_launcher) // On error image
+                    .placeholder(R.drawable.profileplaceholder) // Place holder image
+                    .error(R.drawable.profileplaceholder) // On error image
                     .into(ivCasteProfilePic); // ImageView to display image
 
 

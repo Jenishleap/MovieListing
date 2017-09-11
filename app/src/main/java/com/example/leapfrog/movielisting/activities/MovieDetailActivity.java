@@ -139,8 +139,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .centerCrop() // Image scale type
                 .crossFade()
 //                    .override(800, 500) // Resize image
-                .placeholder(R.mipmap.ic_launcher) // Place holder image
-                .error(R.mipmap.ic_launcher) // On error image
+                .placeholder(R.drawable.bckgnd_placeholder) // Place holder image
+                .error(R.drawable.bckgnd_placeholder) // On error image
                 .into(ivMovieBackground); // ImageView to display image
 
         rbMovieRatings.setNumStars(NUM_OF_STARS);//total num of stars is 5
@@ -161,6 +161,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                         bitmap = resource;
                         setStarColors(bitmap);
 
+
+                        ivMoviePoster.setImageDrawable(null);//in case default place holder is not working
 
                         Drawable d = new BitmapDrawable(getResources(), bitmap);
 
@@ -197,7 +199,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
                 Drawable progress = rbMovieRatings.getProgressDrawable();
 //                DrawableCompat.setTint(progress, getResources().getColor(R.color.green));
-                DrawableCompat.setTint(progress, vibrant);
+                DrawableCompat.setTint(progress, vibrantDark);
 
 
             }
@@ -217,7 +219,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     public void adjustStarColor() {
         Drawable progress = rbMovieRatings.getProgressDrawable();
-//        DrawableCompat.setTint(progress, Color.WHITE);
         DrawableCompat.setTint(progress, getResources().getColor(R.color.green));
 
     }

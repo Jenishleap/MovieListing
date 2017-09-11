@@ -2,11 +2,14 @@ package com.example.leapfrog.movielisting.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,7 +43,7 @@ public class MovieListActivity extends AppCompatActivity {
     public static String POPULAR = "popular";
     public static String NOWPLAYING = "now_playing";
     public static String UPCOMING = "upcoming";
-
+    Toolbar toolbar;
 
     FragmentAdapter fragmentAdapter;
     ViewPager viewpager;
@@ -49,9 +52,9 @@ public class MovieListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_list_activity);
-
+        setTitle(R.string.movie_lists);
         initializeUI();
-
+        setSupportActionBar(toolbar);
         viewpager.setAdapter(fragmentAdapter);
 
 
@@ -59,11 +62,9 @@ public class MovieListActivity extends AppCompatActivity {
 
     private void initializeUI() {
         _mcontext = getApplicationContext();
-
-
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
         viewpager = (ViewPager) findViewById(R.id.viewpager);
-
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
     }
 

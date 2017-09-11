@@ -24,7 +24,8 @@
                 android:id="@+id/ivCasteProfilePic"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/caste_img_height"
-                android:src="@mipmap/ic_launcher" />
+                android:scaleType="fitXY"
+                android:src="@drawable/profileplaceholder" />
 
             <TextView
                 android:id="@+id/tvCasteName"

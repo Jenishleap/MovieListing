@@ -11,6 +11,7 @@ import com.example.leapfrog.movielisting.R;
 public class SplashActivity extends AppCompatActivity {
 
     public int DELAY = 3500;
+//    public int DELAY = 500;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
