@@ -9,16 +9,17 @@ import com.example.leapfrog.movielisting.fragments.MovieListFragment;
 
 import java.util.List;
 
-import static com.example.leapfrog.movielisting.activities.MovieListActivity.NOWPLAYING;
+
+import static com.example.leapfrog.movielisting.activities.MovieListActivity.NOW_PLAYING;
 import static com.example.leapfrog.movielisting.activities.MovieListActivity.POPULAR;
-import static com.example.leapfrog.movielisting.activities.MovieListActivity.TOPRATED;
+import static com.example.leapfrog.movielisting.activities.MovieListActivity.TOP_RATED;
 import static com.example.leapfrog.movielisting.activities.MovieListActivity.UPCOMING;
 
 
 public class FragmentAdapter extends FragmentStatePagerAdapter {
-    List<Fragment> fragments;
-    private static int NUM_OF_FRAGMENTS = 4;
 
+    private static int NUM_OF_FRAGMENTS = 4;
+    List<Fragment> fragments;
 
     public FragmentAdapter(FragmentManager fm) {
         super(fm);
@@ -33,21 +34,25 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-//        return this.fragments.get(position);
 
+        Fragment fragment = null;
         Log.d("frag_position", "fragment_position is: " + position);
         switch (position) {
             case 0:
-                return MovieListFragment.newInstance(POPULAR);
+                fragment = MovieListFragment.newInstance(POPULAR);
+                break;
             case 1:
-                return MovieListFragment.newInstance(TOPRATED);
+                fragment = MovieListFragment.newInstance(TOP_RATED);
+                break;
             case 2:
-                return MovieListFragment.newInstance(UPCOMING);
+                fragment = MovieListFragment.newInstance(UPCOMING);
+                break;
             case 3:
-                return MovieListFragment.newInstance(NOWPLAYING);
-            default:
-                return null;
+                fragment = MovieListFragment.newInstance(NOW_PLAYING);
+                break;
         }
+
+        return fragment;
     }
 
     @Override
@@ -58,20 +63,22 @@ public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-
+        String page = null;
 
         switch (position) {
             case 0:
-                return "POPULAR";
+                page = "POPULAR";
+                break;
             case 1:
-                return "TOPRATED";
+                page = "TOPRATED";
+                break;
             case 2:
-                return "UPCOMING";
+                page = "UPCOMING";
+                break;
             case 3:
-                return "NOWPLAYING";
-            default:
-                return null;
-
+                page = "NOWPLAYING";
+                break;
         }
+        return page;
     }
 }

@@ -24,12 +24,12 @@ public class MovieCasteAdapter extends RecyclerView.Adapter<MovieCasteAdapter.It
     private List<Cast> movies;
     private MovieCasteAdapter.OnItemClickListener onItemClickListener;
     private LayoutInflater layoutInflater;
-    public Context _mcontext;
+    public Context mContext;
 
     public MovieCasteAdapter(Context context) {
         layoutInflater = LayoutInflater.from(context);
         movies = new ArrayList<>();
-        this._mcontext = context;
+        this.mContext = context;
     }
 
     public MovieCasteAdapter(Context context, List<Cast> movies) {
@@ -48,7 +48,7 @@ public class MovieCasteAdapter extends RecyclerView.Adapter<MovieCasteAdapter.It
     public void onBindViewHolder(MovieCasteAdapter.ItemHolder holder, int position) {
 
         Cast tbl = movies.get(position);
-        holder.populateView(tbl, _mcontext);
+        holder.populateView(tbl, mContext);
     }
 
     @Override
@@ -143,10 +143,6 @@ public class MovieCasteAdapter extends RecyclerView.Adapter<MovieCasteAdapter.It
             movies.add(model);
         }
         notifyDataSetChanged();
-    }
-
-    public Cast getMovie(int posiiton) {
-        return movies.get(posiiton);
     }
 
 

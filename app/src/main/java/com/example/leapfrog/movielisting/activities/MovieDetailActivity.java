@@ -24,32 +24,36 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.leapfrog.movielisting.R;
 import com.example.leapfrog.movielisting.adapters.MovieCasteAdapter;
 import com.example.leapfrog.movielisting.fragments.MovieListFragment;
-import com.example.leapfrog.movielisting.helper.HandleResponse;
+import com.example.leapfrog.movielisting.helper.ResponseHandler;
 import com.example.leapfrog.movielisting.helper.RatingCalculator;
 import com.example.leapfrog.movielisting.helper.RetrofitClient;
 import com.example.leapfrog.movielisting.helper.ServerRequest;
 import com.example.leapfrog.movielisting.objects.MovieCasts;
-import com.example.leapfrog.movielisting.objects.MovieDetail;
 
 
 public class MovieDetailActivity extends AppCompatActivity {
 
 
+    public static final int NUM_OF_STARS = 5;
+
+    String movieId, movieTitle, movieRating, movieReleaseDate, movieOverview, moviePosterPath, movieBackgroundPath;
+    String tag = "movie_details";
+
+
     ImageView ivMovieBackground, ivMoviePoster;
     TextView tvMovieDescription, tvReleaseDate, tvRating;
-
-    String TAG = "movie_details";
-    ServerRequest serverRequest;
-    public MovieDetail movieDetail;
-    public MovieCasts movieCasts;
-    MovieCasteAdapter casteAdapter;
-    private LinearLayoutManager llManagerHorizontalKOT;
-    RecyclerView rvmovie_casts;
+    private LinearLayoutManager llManagerHorizontal;
+    RecyclerView rvMovieCasts;
     private CollapsingToolbarLayout collapsingToolbarLayout = null;
     RatingBar rbMovieRatings;
+
+
+    ServerRequest serverRequest;
+    public MovieCasts movieCasts;
+    MovieCasteAdapter casteAdapter;
+
     private Bitmap bitmap = null;
-    public static int NUM_OF_STARS = 5;
-    String movie_id, movie_title, movie_rating, movie_releasedate, movie_overview, movie_posterpath, movie_backgroundpath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,28 +65,28 @@ public class MovieDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        intializeUI();
+        intializeUi();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            this.movie_id = extras.getString(MovieListFragment.MOVIE_ID);
-            this.movie_title = extras.getString(MovieListFragment.MOVIE_TITLE);
-            this.movie_rating = extras.getString(MovieListFragment.MOVIE_RATING);
-            this.movie_releasedate = extras.getString(MovieListFragment.MOVIE_RELEASEDATE);
-            this.movie_overview = extras.getString(MovieListFragment.MOVIE_OVERVIEW);
-            this.movie_posterpath = extras.getString(MovieListFragment.MOVIE_POSTERPATH);
-            this.movie_backgroundpath = extras.getString(MovieListFragment.MOVIE_BACKGROUNDPATH);
+            this.movieId = extras.getString(MovieListFragment.MOVIE_ID);
+            this.movieTitle = extras.getString(MovieListFragment.MOVIE_TITLE);
+            this.movieRating = extras.getString(MovieListFragment.MOVIE_RATING);
+            this.movieReleaseDate = extras.getString(MovieListFragment.MOVIE_RELEASE_DATE);
+            this.movieOverview = extras.getString(MovieListFragment.MOVIE_OVERVIEW);
+            this.moviePosterPath = extras.getString(MovieListFragment.MOVIE_POSTER_PATH);
+            this.movieBackgroundPath = extras.getString(MovieListFragment.MOVIE_BACKGROUND_PATH);
 
         }
-        Log.d(TAG, "the movie detail: " + movie_id);
-        collapsingToolbarLayout.setTitle(movie_title);
+        Log.d(tag, "the movie detail: " + movieId);
+        collapsingToolbarLayout.setTitle(movieTitle);
 
-        updateUI();
-        fetchMovieCaste(movie_id);
+        updateUi();
+        fetchMovieCaste(movieId);
         toolbarTextAppernce();
     }
 
-    private void intializeUI() {
+    private void intializeUi() {
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         ivMovieBackground = (ImageView) findViewById(R.id.ivMovieBackground);
         ivMoviePoster = (ImageView) findViewById(R.id.ivMoviePoster);
@@ -91,17 +95,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvMovieDescription = (TextView) findViewById(R.id.tvMovieDescription);
         tvReleaseDate = (TextView) findViewById(R.id.tvReleaseDate);
         tvRating = (TextView) findViewById(R.id.tvRating);
-        rvmovie_casts = (RecyclerView) findViewById(R.id.rvmovie_casts);
-        llManagerHorizontalKOT = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        rvmovie_casts.setLayoutManager(llManagerHorizontalKOT);
+        rvMovieCasts = (RecyclerView) findViewById(R.id.rvmovie_casts);
+        llManagerHorizontal = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        rvMovieCasts.setLayoutManager(llManagerHorizontal);
         casteAdapter = new MovieCasteAdapter(getApplicationContext());
-        rvmovie_casts.setAdapter(casteAdapter);
+        rvMovieCasts.setAdapter(casteAdapter);
 
     }
 
 
-    public void fetchMovieCaste(String movie_id) {
-        serverRequest = new ServerRequest(getApplicationContext(), new HandleResponse().new HandleMovieCaste() {
+    public void fetchMovieCaste(String movieId) {
+        serverRequest = new ServerRequest(getApplicationContext(), new ResponseHandler().new MovieCasteHandler() {
             @Override
             public void handleMovieCaste(MovieCasts casts) {
                 movieCasts = casts;
@@ -122,20 +126,20 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
         }, MovieDetailActivity.this);
-        serverRequest.getMovieCaste(movie_id);
+        serverRequest.getMovieCaste(movieId);
 
     }
 
-    private void updateUI() {
+    private void updateUi() {
 
-        tvMovieDescription.setText(movie_overview);
-        tvReleaseDate.setText("Release Date: " + movie_releasedate);
-        tvRating.setText(movie_rating);
+        tvMovieDescription.setText(movieOverview);
+        tvReleaseDate.setText("Release Date: " + movieReleaseDate);
+        tvRating.setText(movieRating);
 
 
         //set backgroundpath for movie
         Glide.with(getApplicationContext())
-                .load(RetrofitClient.IMG_URL + movie_backgroundpath) // Image URL
+                .load(RetrofitClient.IMG_URL + movieBackgroundPath) // Image URL
                 .centerCrop() // Image scale type
                 .crossFade()
 //                    .override(800, 500) // Resize image
@@ -144,13 +148,13 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(ivMovieBackground); // ImageView to display image
 
         rbMovieRatings.setNumStars(NUM_OF_STARS);//total num of stars is 5
-        rbMovieRatings.setRating(RatingCalculator.calculateRatingNum(movie_rating));
+        rbMovieRatings.setRating(RatingCalculator.calculateRatingNum(movieRating));
 
 
         //set posterpath for the movie
         //grab color for stars with respect to posterpath
         Glide.with(this)
-                .load(RetrofitClient.IMG_URL + movie_posterpath)
+                .load(RetrofitClient.IMG_URL + moviePosterPath)
                 .asBitmap()
                 .centerCrop()
                 .placeholder(R.mipmap.ic_launcher)
@@ -198,7 +202,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
                 Drawable progress = rbMovieRatings.getProgressDrawable();
-//                DrawableCompat.setTint(progress, getResources().getColor(R.color.green));
                 DrawableCompat.setTint(progress, vibrantDark);
 
 
@@ -217,9 +220,4 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     }
 
-    public void adjustStarColor() {
-        Drawable progress = rbMovieRatings.getProgressDrawable();
-        DrawableCompat.setTint(progress, getResources().getColor(R.color.green));
-
-    }
 }

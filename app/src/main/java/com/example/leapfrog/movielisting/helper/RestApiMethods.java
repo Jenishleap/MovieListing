@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 
 
 //synchronous
-public interface RESTAPIMethods {
+public interface RestApiMethods {
 
 
     @GET("movie/{category}")
