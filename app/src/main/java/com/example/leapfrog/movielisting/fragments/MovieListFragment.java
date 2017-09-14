@@ -279,7 +279,7 @@ public class MovieListFragment extends Fragment {
             }
         };
 
-        serverRequest = new ServerRequest(mContext, new ResponseHandler().new AllMoviesHandler() {
+        serverRequest = new ServerRequest(mContext, new ResponseHandler.AllMoviesHandler() {
             @Override
             public void handleResponse(LinkedHashMap<String, Movie> newMovies, ArrayList<String> newIds, String category) {
 

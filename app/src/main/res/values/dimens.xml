@@ -19,7 +19,7 @@
     <dimen name="movie_overview_height">70dp</dimen>
     <dimen name="card_margin">5dp</dimen>
     <dimen name="rv_card_margin">6dp</dimen>
-    <dimen name="rv_caste_height">105dp</dimen>
+    <dimen name="rv_caste_height">115dp</dimen>
     <dimen name="card_elevation">8dp</dimen>
     <dimen name="movie_item_brief_padding">3dp</dimen>
 

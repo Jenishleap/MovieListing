@@ -105,7 +105,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
 
     public void fetchMovieCaste(String movieId) {
-        serverRequest = new ServerRequest(getApplicationContext(), new ResponseHandler().new MovieCasteHandler() {
+        serverRequest = new ServerRequest(getApplicationContext(), new ResponseHandler.MovieCasteHandler() {
             @Override
             public void handleMovieCaste(MovieCasts casts) {
                 movieCasts = casts;

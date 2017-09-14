@@ -34,7 +34,6 @@ public class ServerRequest {
 
 
     ResponseHandler.AllMoviesHandler handleResponse;
-    ResponseHandler.MovieDetailHandler handleMovieDetail;
     ResponseHandler.MovieCasteHandler handleMovieCaste;
 
     Activity activityRef;
@@ -45,15 +44,6 @@ public class ServerRequest {
         pbTitle = "Loading...";
         this.mContext = context;
         this.handleResponse = response;
-        this.activityRef = activityRef;
-        progressDialog = getProgressDialog(activityRef, pbTitle);
-    }
-
-    //this is unused
-    public ServerRequest(Context context, ResponseHandler.MovieDetailHandler response, Activity activityRef) {
-        pbTitle = "Loading...";
-        this.mContext = context;
-        this.handleMovieDetail = response;
         this.activityRef = activityRef;
         progressDialog = getProgressDialog(activityRef, pbTitle);
     }
