@@ -22,12 +22,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ItemHolder> 
     private List<Movie> movies;
     private OnItemClickListener onItemClickListener;
     private LayoutInflater layoutInflater;
-    public Context _mcontext;
+    public Context mContext;
 
     public MovieAdapter(Context context) {
         layoutInflater = LayoutInflater.from(context);
         movies = new ArrayList<>();
-        this._mcontext = context;
+        this.mContext = context;
     }
 
     public MovieAdapter(Context context, List<Movie> movies) {
@@ -38,7 +38,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ItemHolder> 
 
     @Override
     public MovieAdapter.ItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemCardView = (View) layoutInflater.inflate(R.layout.movie_detail, parent, false);
+        View itemCardView = layoutInflater.inflate(R.layout.movie_detail, parent, false);
         return new ItemHolder(itemCardView, this);
     }
 
@@ -46,7 +46,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ItemHolder> 
     public void onBindViewHolder(MovieAdapter.ItemHolder holder, int position) {
 
         Movie tbl = movies.get(position);
-        holder.populateView(tbl, _mcontext);
+        holder.populateView(tbl, mContext);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ItemHolder> 
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(ItemHolder item, int position);
+        void onItemClick(ItemHolder item, int position);
     }
 
     public void add(int location, Movie iName) {
@@ -119,8 +119,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ItemHolder> 
                     .centerCrop() // Image scale type
                     .crossFade()
 //                    .override(800, 500) // Resize image
-                    .placeholder(R.mipmap.ic_launcher) // Place holder image
-                    .error(R.mipmap.ic_launcher) // On error image
+                    .placeholder(R.drawable.profileplaceholder) // Place holder image
+                    .error(R.drawable.profileplaceholder) // On error image
                     .into(ivMoviePoster); // ImageView to display image
 
 
@@ -143,10 +143,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ItemHolder> 
             movies.add(model);
         }
         notifyDataSetChanged();
-    }
-
-    public Movie getMovie(int posiiton) {
-        return movies.get(posiiton);
     }
 
 

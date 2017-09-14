@@ -12,14 +12,16 @@
 
     <dimen name="movietitlespadding">5dp</dimen>
     <dimen name="movie_item_height">150dp</dimen>
-    <dimen name="movie_item_margin">5dp</dimen>
+    <dimen name="movie_item_margin">3dp</dimen>
 
     <dimen name="cat_btns_height">40dp</dimen>
     <dimen name="movie_bckgnd_height">250dp</dimen>
-    <dimen name="movie_overview_height">50dp</dimen>
+    <dimen name="movie_overview_height">70dp</dimen>
     <dimen name="card_margin">5dp</dimen>
-    <dimen name="rv_card_margin">2dp</dimen>
-    <dimen name="rv_caste_height">105dp</dimen>
+    <dimen name="rv_card_margin">6dp</dimen>
+    <dimen name="rv_caste_height">115dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="movie_item_brief_padding">3dp</dimen>
 
     <dimen name="caste_itm_width">100dp</dimen>
     <dimen name="caste_img_height">80dp</dimen>

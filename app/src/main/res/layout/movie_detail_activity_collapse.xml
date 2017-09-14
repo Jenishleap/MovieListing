@@ -21,7 +21,8 @@
                 android:id="@+id/ivMovieBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher"
+                android:scaleType="fitXY"
+                android:src="@drawable/bckgnd_placeholder"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7" />
 
@@ -53,7 +54,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/card_margin"
                 android:padding="@dimen/overallpadding">
 
 
@@ -67,7 +67,9 @@
                         android:id="@+id/ivMoviePoster"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.7" />
+                        android:layout_weight="0.7"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/profileplaceholder" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -75,16 +77,6 @@
                         android:layout_weight="0.3"
                         android:gravity="start|center_vertical"
                         android:orientation="vertical">
-
-                       <!-- <TextView
-                            android:id="@+id/tvMovieTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="top"
-                            android:padding="@dimen/movietitlespadding"
-                            android:text="@string/movie_title"
-                            android:textSize="@dimen/txt_ultra_ultra_large"
-                            android:textStyle="bold" />-->
 
 
                         <TextView

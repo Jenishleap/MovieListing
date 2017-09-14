@@ -2,6 +2,7 @@ package com.example.leapfrog.movielisting.objects;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,7 +10,7 @@ public class AllMovies {
     @SerializedName("page")
     private int page;
     @SerializedName("results")
-    private List<Movie> results;
+    private ArrayList<Movie> results;
     @SerializedName("total_results")
     private int totalResults;
     @SerializedName("total_pages")
@@ -23,11 +24,11 @@ public class AllMovies {
         this.page = page;
     }
 
-    public List<Movie> getResults() {
+    public ArrayList<Movie> getResults() {
         return results;
     }
 
-    public void setResults(List<Movie> results) {
+    public void setResults(ArrayList<Movie> results) {
         this.results = results;
     }
 

@@ -1,16 +1,16 @@
 package com.example.leapfrog.movielisting.helper;
 
 
-import com.example.leapfrog.movielisting.MovieDetailActivity;
+import com.example.leapfrog.movielisting.activities.MovieDetailActivity;
 
 public class RatingCalculator {
 
 
-    public static Float calculateRatingNum(String rate_str) {
-        Float rate_flt = Float.parseFloat(rate_str);
+    public static Float calculateRatingNum(String rateStr) {
+        Float rate = Float.parseFloat(rateStr);
         //rating num in 5
-        Float final_rate = (rate_flt / 10) * MovieDetailActivity.NUM_OF_STARS;
-        return final_rate;
+        Float finalRate = (rate / 10) * MovieDetailActivity.NUM_OF_STARS;
+        return finalRate;
     }
 
 }
